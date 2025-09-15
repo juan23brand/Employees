@@ -8,7 +8,7 @@ public interface IGenericUnitOfWork<T> where T : class
 
     Task<ActionResponse<T>> GetAsync(int id);
 
-    Task<ActionResponse<T>> GetAsync(string name);
+    Task<ActionResponse<IEnumerable<T>>> GetAsync(string name);
 
     Task<ActionResponse<T>> AddAsync(T entity);
 

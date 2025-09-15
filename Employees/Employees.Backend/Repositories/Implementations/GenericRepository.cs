@@ -1,5 +1,6 @@
 ﻿using Employees.Backend.Data;
 using Employees.Backend.Repositories.Interfaces;
+using Employees.Shared.Entities;
 using Employees.Shared.Responses;
 using Microsoft.EntityFrameworkCore;
 
@@ -92,20 +93,26 @@ namespace Employees.Backend.Repositories.Implementations
             };
         }
 
-        public virtual async Task<ActionResponse<T>> GetAsync(string name)
+        public virtual async Task<ActionResponse<IEnumerable<T>>> GetAsync(string name)
         {
-            var row = await _entity.FindAsync(name);
-            if (row == null)
+            if (typeof(T) == typeof(Employee))
             {
-                return new ActionResponse<T>
+                var employees = await _context.Employees
+                    .Where(e => e.FirstName.Contains(name) || e.LastName.Contains(name))
+                    .Cast<T>()
+                    .ToListAsync();
+
+                return new ActionResponse<IEnumerable<T>>
                 {
-                    Message = "Registro no encontrado."
+                    WasSuccess = employees.Any(),
+                    Result = employees,
+                    Message = employees.Any() ? null : "No se encontraron registros."
                 };
             }
-            return new ActionResponse<T>
+
+            return new ActionResponse<IEnumerable<T>>
             {
-                WasSuccess = true,
-                Result = row
+                Message = "Búsqueda por nombre no soportada para esta entidad."
             };
         }
 
