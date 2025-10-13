@@ -1,5 +1,7 @@
 ﻿using Employees.Backend.Data;
+using Employees.Backend.Helpers;
 using Employees.Backend.Repositories.Interfaces;
+using Employees.Shared.DTOs;
 using Employees.Shared.Entities;
 using Employees.Shared.Responses;
 using Microsoft.EntityFrameworkCore;
@@ -136,6 +138,30 @@ namespace Employees.Backend.Repositories.Implementations
             {
                 return ExceptionActionResponse(ex);
             }
+        }
+
+        public virtual async Task<ActionResponse<IEnumerable<T>>> GetAsync(PaginationDTO pagination)
+        {
+            var queryable = _entity.AsQueryable();
+
+            return new ActionResponse<IEnumerable<T>>
+            {
+                WasSuccess = true,
+                Result = await queryable
+                    .Paginate(pagination)
+                    .ToListAsync()
+            };
+        }
+
+        public virtual async Task<ActionResponse<int>> GetTotalRecordsAsync(PaginationDTO pagination)
+        {
+            var queryable = _entity.AsQueryable();
+            double count = await queryable.CountAsync();
+            return new ActionResponse<int>
+            {
+                WasSuccess = true,
+                Result = (int)count
+            };
         }
 
         private ActionResponse<T> ExceptionActionResponse(Exception ex) => new ActionResponse<T>

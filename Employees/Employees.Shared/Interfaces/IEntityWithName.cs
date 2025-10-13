@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Employees.Shared.Interfaces
 {
-    internal interface IEntityWithName
+    public interface IEntityWithName
     {
-        string Name { get; set; }
+        string FirstName { get; set; }
     }
 }
