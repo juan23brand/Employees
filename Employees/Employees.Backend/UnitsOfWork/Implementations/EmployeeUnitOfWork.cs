@@ -21,4 +21,6 @@ public class EmployeeUnitOfWork : GenericUnitOfWork<Employee>, IEmployeeUnitOfWo
     public override async Task<ActionResponse<Employee>> GetAsync(int id) => await _employeesRepository.GetAsync(id);
 
     public override async Task<ActionResponse<IEnumerable<Employee>>> GetAsync(PaginationDTO pagination) => await _employeesRepository.GetAsync(pagination);
+
+    public override async Task<ActionResponse<int>> GetTotalRecordsAsync(PaginationDTO pagination) => await _employeesRepository.GetTotalRecordsAsync(pagination);
 }
