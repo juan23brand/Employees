@@ -1,3 +1,15 @@
-﻿<h3>EmployeeEdit</h3>
+﻿@if (employee is null)
+{
+    <Employees.Frontend.Components.Pages.Shared.Loading />
+}
+else
+{
+    <MudDialog>
+        <DialogContent>
+            <EmployeeForm Employee="employee" OnValidSubmit="EditAsync" ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+
+}
 
 

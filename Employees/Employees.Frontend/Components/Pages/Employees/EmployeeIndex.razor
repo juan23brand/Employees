@@ -30,12 +30,14 @@ else
             <MudTh>Id</MudTh>
             <MudTh>Nombre</MudTh>
             <MudTh>Apellido</MudTh>
+            <MudTh>Salario</MudTh>
             <MudTh style="width: 270px;">Acciones</MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Id">@context.Id</MudTd>
             <MudTd DataLabel="Nombre">@context.FirstName</MudTd>
             <MudTd DataLabel="Apellido">@context.LastName</MudTd>
+            <MudTd DataLabel="Salario">@context.Salary</MudTd>
             <MudTd>
                 <MudTooltip Text="Editar">
                     <MudButton Variant="Variant.Filled"
