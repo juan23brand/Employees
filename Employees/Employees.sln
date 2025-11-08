@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employees.Shared", "Employees.Shared\Employees.Shared.csproj", "{ECAA6891-39E6-441E-BE1D-48EB1775BC6E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Employees.Frontend", "Employees.Frontend\Employees.Frontend.csproj", "{3B01A912-B96E-8D4D-EC94-262C057FF200}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ECAA6891-39E6-441E-BE1D-48EB1775BC6E} = {ECAA6891-39E6-441E-BE1D-48EB1775BC6E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

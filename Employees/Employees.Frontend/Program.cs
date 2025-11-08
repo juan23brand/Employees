@@ -4,10 +4,7 @@ using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add MudBlazor services
 builder.Services.AddMudServices();
-
-// Add services to the container.
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri("https://localhost:7228") });
 builder.Services.AddScoped<IRepository, Repository>();
