@@ -1,2 +1,14 @@
-﻿
+﻿@if (country is null)
+{
+    <Employees.Frontend.Components.Pages.Shared.Loading />
+}
+else
+{
+    <MudDialog>
+        <DialogContent>
+            <CountryForm Country="country" OnValidSubmit="EditAsync" ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+}
+
 
