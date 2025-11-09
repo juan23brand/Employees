@@ -1,12 +1,15 @@
-﻿using Employees.Backend.UnitsOfWork.Interfaces;
+﻿using Employees.Backend.UnitsOfWork.Implementations;
+using Employees.Backend.UnitsOfWork.Interfaces;
 using Employees.Shared.DTOs;
 using Employees.Shared.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Employees.Backend.UnitsOfWork.Implementations;
 
 namespace Employees.Backend.Controllers;
 
 [ApiController]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/[controller]")]
 public class CitiesController : GenericController<City>
 {
