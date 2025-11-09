@@ -1,0 +1,12 @@
+﻿@if (city is null)
+{
+    <Employees.Frontend.Components.Pages.Shared.Loading />
+}
+else
+{
+    <MudDialog>
+        <DialogContent>
+            <Employees.Frontend.Components.Pages.Shared.FormWithName Label="Ciudad:" Model="city" OnValidSubmit="EditAsync" ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+}

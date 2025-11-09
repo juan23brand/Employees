@@ -1,0 +1,12 @@
+﻿@if (state is null)
+{
+    <Employees.Frontend.Components.Pages.Shared.Loading />
+}
+else
+{
+    <MudDialog>
+        <DialogContent>
+            <Employees.Frontend.Components.Pages.Shared.FormWithName Label="Estado:" Model="state" OnValidSubmit="EditAsync" ReturnAction="Return" />
+        </DialogContent>
+    </MudDialog>
+}
