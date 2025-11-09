@@ -1,8 +1,8 @@
 ﻿<EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
     <MudTextField Label="Nombre"
-                  @bind-Value="@Employee.FirstName"
-                  For="@(() => Employee.FirstName)"
+                  @bind-Value="@Employee.Name"
+                  For="@(() => Employee.Name)"
                   Class="mb-4" />
     <MudTextField Label="Apellido"
                   @bind-Value="@Employee.LastName"

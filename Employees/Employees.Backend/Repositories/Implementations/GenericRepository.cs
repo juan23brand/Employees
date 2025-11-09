@@ -3,6 +3,7 @@ using Employees.Backend.Helpers;
 using Employees.Backend.Repositories.Interfaces;
 using Employees.Shared.DTOs;
 using Employees.Shared.Entities;
+using Employees.Shared.Interfaces;
 using Employees.Shared.Responses;
 using Microsoft.EntityFrameworkCore;
 
@@ -100,7 +101,7 @@ namespace Employees.Backend.Repositories.Implementations
             if (typeof(T) == typeof(Employee))
             {
                 var employees = await _context.Employees
-                    .Where(e => e.FirstName.Contains(name) || e.LastName.Contains(name))
+                    .Where(e => e.Name.Contains(name) || e.LastName.Contains(name))
                     .Cast<T>()
                     .ToListAsync();
 
@@ -111,11 +112,25 @@ namespace Employees.Backend.Repositories.Implementations
                     Message = employees.Any() ? null : "No se encontraron registros."
                 };
             }
-
-            return new ActionResponse<IEnumerable<T>>
+            else
             {
-                Message = "Búsqueda por nombre no soportada para esta entidad."
-            };
+                var dbSet = _context.Set<T>();
+                var query = dbSet.AsQueryable();
+
+                if (typeof(IEntityWithName).IsAssignableFrom(typeof(T)))
+                {
+                    query = query.Where(x => EF.Property<string>(x, "Name").Contains(name));
+                }
+
+                var results = await query.ToListAsync();
+
+                return new ActionResponse<IEnumerable<T>>
+                {
+                    WasSuccess = results.Any(),
+                    Result = results,
+                    Message = results.Any() ? null : "No se encontraron registros."
+                };
+            }
         }
 
         public virtual async Task<ActionResponse<T>> UpdateAsync(T entity)

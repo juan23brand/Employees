@@ -120,7 +120,7 @@ public partial class EmployeeIndex
     {
         var parameters = new DialogParameters
         {
-            { "Message", $"Estas seguro de borrar el empleado: {employee.FirstName} {employee.LastName}" }
+            { "Message", $"Estas seguro de borrar el empleado: {employee.Name} {employee.LastName}" }
         };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, CloseOnEscapeKey = true };
         var dialog = await DialogService.ShowAsync<ConfirmDialog>("Confirmación", parameters, options);

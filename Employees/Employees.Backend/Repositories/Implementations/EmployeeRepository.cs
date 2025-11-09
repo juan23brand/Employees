@@ -45,7 +45,7 @@ public class EmployeeRepository : GenericRepository<Employee>, IEmployeeReposito
             .AsQueryable();
         if (!string.IsNullOrWhiteSpace(pagination.Filter))
         {
-            queryable = queryable.Where(x => x.FirstName.ToLower().Contains(pagination.Filter.ToLower()) || 
+            queryable = queryable.Where(x => x.Name.ToLower().Contains(pagination.Filter.ToLower()) ||
             x.LastName.ToLower().Contains(pagination.Filter.ToLower()));
         }
 
@@ -53,19 +53,20 @@ public class EmployeeRepository : GenericRepository<Employee>, IEmployeeReposito
         {
             WasSuccess = true,
             Result = await queryable
-                .OrderBy(x => x.FirstName)
+                .OrderBy(x => x.Name)
                 .ThenBy(e => e.LastName)
                 .Paginate(pagination)
                 .ToListAsync()
         };
     }
+
     public override async Task<ActionResponse<int>> GetTotalRecordsAsync(PaginationDTO pagination)
     {
         var queryable = _context.Employees.AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(pagination.Filter))
         {
-            queryable = queryable.Where(x => x.FirstName.ToLower().Contains(pagination.Filter.ToLower()) ||
+            queryable = queryable.Where(x => x.Name.ToLower().Contains(pagination.Filter.ToLower()) ||
             x.LastName.ToLower().Contains(pagination.Filter.ToLower()));
         }
 
@@ -76,6 +77,4 @@ public class EmployeeRepository : GenericRepository<Employee>, IEmployeeReposito
             Result = (int)count
         };
     }
-
-
 }
