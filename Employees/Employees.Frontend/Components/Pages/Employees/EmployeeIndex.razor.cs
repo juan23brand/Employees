@@ -1,13 +1,15 @@
 using Employees.Frontend.Components.Pages.Shared;
 using Employees.Frontend.Repositories;
+using Employees.Shared.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System.Diagnostics.Metrics;
-using Employees.Shared.Entities;
 using System.Net;
 
 namespace Employees.Frontend.Components.Pages.Employees;
 
+[Authorize(Roles = "Admin")]
 public partial class EmployeeIndex
 {
     private List<Employee>? Employees { get; set; }
