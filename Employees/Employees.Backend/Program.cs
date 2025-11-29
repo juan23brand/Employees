@@ -1,4 +1,5 @@
 using Employees.Backend.Data;
+using Employees.Backend.Helpers;
 using Employees.Backend.Repositories.Implementations;
 using Employees.Backend.Repositories.Interfaces;
 using Employees.Backend.UnitsOfWork.Implementations;
@@ -72,6 +73,7 @@ builder.Services.AddScoped<ICitiesRepository, CitiesRepository>();
 builder.Services.AddScoped<ICitiesUnitOfWork, CitiesUnitOfWork>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IUsersUnitOfWork, UsersUnitOfWork>();
+builder.Services.AddScoped<IFileStorage, FileStorage>();
 
 builder.Services.AddTransient<SeedDb>();
 
